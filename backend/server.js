@@ -1,17 +1,24 @@
-const { response } = require("express")
 const express = require("express")
+require("dotenv").config()
+
+const postRoutes = require("./routes/posts")
 
 // express app
 const app = express()
 
 
-// routes
-app.get("/", (req, res) => {
-    res.json({msg: "Welcome to the app"})
+// middleware
+app.use(express.json())
+app.use((req, res, next) => {
+    console.log(req.path, req.method)
+    next()
 })
+
+// routes
+app.use('/api/posts', postRoutes)
 
 
 // listen for requests
-app.listen(4000, () => {
-    console.log("Listening On Port 4000!!")
+app.listen(process.env.PORT, () => {
+    console.log(`Listening On Port ${process.env.PORT}!!`)
 })
