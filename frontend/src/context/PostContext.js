@@ -12,6 +12,10 @@ export const postsReducer = (state, action) => { // state is prevState and our p
             return {
                 posts: [action.payload, ...state.posts]
             }
+        case 'DELETE_POST':
+            return {
+                posts: state.posts.filter(post => post._id !== action.payload._id)
+            }
         default:
             return state
     }
@@ -23,8 +27,8 @@ export const PostsContextProvider = ({children}) => {
     })
 
     return (
-        <PostsContext.Provider value={{...state, dispatch}}> // Given to us when we created context. needs to wrap component tree where state needs to be updated. In our case, we will wrap App, we do that in index.js. And then we also need to wrap App's children like so
-
+        //   Given to us when we created context. needs to wrap component tree where state needs to be updated. In our case, we will wrap App, we do that in index.js. And then we also need to wrap App's children like so
+         <PostsContext.Provider value={{...state, dispatch}}>
             {children}
         </PostsContext.Provider>
     )

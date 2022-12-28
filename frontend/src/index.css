@@ -38,7 +38,16 @@ a {
 
 .create {
   /* display: none; */
-  
+
+}
+.trashcan {
+  height: 25px;
+  width: 25px;
+  float: right;
+  margin-left: 8px;
+}
+.trashcan:hover {
+  cursor: pointer;
 }
 #text-area {
   display: block;
