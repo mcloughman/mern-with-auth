@@ -1,11 +1,13 @@
-import {useEffect, useState} from "react"
+import {useEffect} from "react"
+import { usePostsContext } from "../hooks/usePostsContext"
 
 // components
 import PostDetails from "../components/postDetails"
 import PostForm from "../components/PostForm"
 
 const Home = () => {
-    const [posts, setPosts] = useState(null)
+    // const [posts, setPosts] = useState(null)
+    const {posts, dispatch} = usePostsContext()
     useEffect(() => {
         const fetchPosts = async() => {
             
@@ -15,11 +17,15 @@ const Home = () => {
             const json = await response.json()
             console.log(json)
             if (response.ok) {
-                setPosts(json)
+                // setPosts(json)
+                dispatch({
+                    type: 'SET_POSTS',
+                    payload: json
+                })
             } 
         }
         fetchPosts()
-    }, [])
+    }, [dispatch])
     return ( 
         <div className="home">
             <a href="https://www.flaticon.com/free-icons/sports-and-competition" title="sports and competition icons">Sports and competition icons created by Freepik - Flaticon</a>

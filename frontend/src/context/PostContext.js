@@ -23,7 +23,7 @@ export const PostsContextProvider = ({children}) => {
     })
 
     return (
-        <PostsContext.Provider value={{state, dispatch}}> // Given to us when we created context. needs to wrap component tree where state needs to be updated. In our case, we will wrap App, we do that in index.js. And then we also need to wrap App's children like so
+        <PostsContext.Provider value={{...state, dispatch}}> // Given to us when we created context. needs to wrap component tree where state needs to be updated. In our case, we will wrap App, we do that in index.js. And then we also need to wrap App's children like so
 
             {children}
         </PostsContext.Provider>

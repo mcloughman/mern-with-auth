@@ -37,7 +37,8 @@ a {
 }
 
 .create {
-  display: none;
+  /* display: none; */
+  
 }
 #text-area {
   display: block;
