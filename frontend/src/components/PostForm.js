@@ -7,6 +7,7 @@ const PostForm = () => {
     const [title, setTitle] = useState("")
     const [body, setBody] = useState("")
     const [error, setError] = useState(null)
+    const [emptyFields, setEmptyFields] = useState([])
 
     const handleSubmit = async(e) => {
         e.preventDefault();
@@ -22,11 +23,13 @@ const PostForm = () => {
          const json = await response.json()
          if (!response.ok) {
             setError(json.error)
+            setEmptyFields(json.emptyFields)
          }
          if (response.ok) {
             setTitle("")
             setBody("")
             setError(null)
+            setEmptyFields([])
             console.log("New Post Added")
             dispatch({
                 type: 'CREATE_POST',
@@ -44,6 +47,7 @@ const PostForm = () => {
                 id="" 
                 onChange={(e) => setTitle(e.target.value)}
                 value={title}
+                className={emptyFields.includes('title') ? 'error': ''}
                 />
             <label htmlFor="">Body</label>
             <textarea 
@@ -51,6 +55,7 @@ const PostForm = () => {
                 id="text-area" 
                 onChange={(e) => setBody(e.target.value)}
                 value={body}
+                className={emptyFields.includes('body') ? 'error': ''}
                 />
                 <button>Add Post</button>
                 {error && <div className="error">{error}</div>}

@@ -28,6 +28,18 @@ const getPost = async(req, res) => {
 const createPost = async(req, res) => {
     const {title,body} = req.body;
 
+    // use empty fields for better error handling
+    let emptyFields = []
+    if (!title) {
+        emptyFields.push("title")
+    }
+    if (!body) {
+        emptyFields.push("body")
+    }
+    if (emptyFields.length > 0) {
+        return res.status(400).json({error: "Please fill in all fields!", emptyFields})
+    }
+
     // add post to db
     try {
         const post = await Post.create({title, body})
