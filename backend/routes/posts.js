@@ -1,8 +1,9 @@
 
 const express = require("express");
-const router = express.Router();
+
 const Post = require("../models/postModel")
 const {createPost, getPosts, getPost, updatePost, deletePost} = require("../controllers/postController")
+const router = express.Router();
 
 // GET all blogs
 router.get("/", getPosts)
