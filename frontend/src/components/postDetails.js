@@ -1,5 +1,7 @@
+import formatDistanceToNow from'date-fns/formatDistanceToNow'
 import trashIcon from "../images/trashcan.png"
 import { usePostsContext } from "../hooks/usePostsContext";
+
 
 const PostDetails = ({post}) => {
 
@@ -22,9 +24,9 @@ const PostDetails = ({post}) => {
     }
     return ( 
         <div className="post-details">
-            <h3>{createdAt}</h3>
+            <h3>{formatDistanceToNow(new Date(createdAt), {addSuffix: true})}</h3>
             <h4>{title}<img src={trashIcon} alt="traschcan" className="trashcan" onClick={handleClick}/></h4>
-            <p>{body.substring(0,4)}...</p>
+            <p><a href={`http://localhost:4000/api/posts/${_id}`}>{body.substring(0,4)}...</a></p>
             
         </div>
      )

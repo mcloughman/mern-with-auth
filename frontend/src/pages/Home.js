@@ -2,11 +2,11 @@ import {useEffect} from "react"
 import { usePostsContext } from "../hooks/usePostsContext"
 
 // components
-import PostDetails from "../components/postDetails"
+import PostDetails from "../components/PostDetails"
 import PostForm from "../components/PostForm"
 
 const Home = () => {
-    // const [posts, setPosts] = useState(null)
+    
     const {posts, dispatch} = usePostsContext()
     useEffect(() => {
         const fetchPosts = async() => {
