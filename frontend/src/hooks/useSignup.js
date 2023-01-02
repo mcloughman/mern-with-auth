@@ -26,7 +26,7 @@ export const useSignup = () => {
             // save user to localstorage
             localStorage.setItem('user', JSON.stringify(json))
 
-            // update the auth context
+            // update the auth context - we don't need separate signup, we just log them in when they signup
             dispatch({
                 type: "LOGIN",
                 payload: json

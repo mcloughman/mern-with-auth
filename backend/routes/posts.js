@@ -3,7 +3,9 @@ const express = require("express");
 
 const Post = require("../models/postModel")
 const {createPost, getPosts, getPost, updatePost, deletePost} = require("../controllers/postController")
+const requireAuth = require("../middleware/requireAuth")
 const router = express.Router();
+router.use(requireAuth) // this will fire the middleware before the controller functions are called as we need authentication for all routes. If the user is authenticated, we now have req.user from the requireAuth middleware
 
 // GET all blogs
 router.get("/", getPosts)

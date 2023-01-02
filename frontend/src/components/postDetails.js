@@ -1,6 +1,7 @@
 import formatDistanceToNow from'date-fns/formatDistanceToNow'
 import trashIcon from "../images/trashcan.png"
 import { usePostsContext } from "../hooks/usePostsContext";
+import { useAuthContext } from '../hooks/useAuthContext';
 
 
 const PostDetails = ({post}) => {
@@ -8,10 +9,17 @@ const PostDetails = ({post}) => {
     const {title, body, createdAt, _id} = post;
     
     const {dispatch} = usePostsContext()
+    const {user} = useAuthContext()
 
     const handleClick = async(e) => {
+        if (!user) {
+            return
+        }
         const response = await fetch(`/api/posts/${_id}`, {
             method: "DELETE",
+            headers: {
+                'Authorization': `Bearer ${user.token}`
+            }
 
         })
         const json = await response.json();

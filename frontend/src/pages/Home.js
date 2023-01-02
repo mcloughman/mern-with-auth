@@ -1,17 +1,26 @@
 import {useEffect} from "react"
 import { usePostsContext } from "../hooks/usePostsContext"
+import {useAuthContext} from "../hooks/useAuthContext"
 
 // components
 import PostDetails from "../components/PostDetails"
 import PostForm from "../components/PostForm"
 
 const Home = () => {
-    
+    const {user} = useAuthContext()
     const {posts, dispatch} = usePostsContext()
     useEffect(() => {
         const fetchPosts = async() => {
             
-            const response = await fetch("/api/posts");
+            
+            
+            const response = await fetch("/api/posts", {
+                headers: {
+                   'Authorization': `Bearer ${user.token}`     
+                }
+                
+            }
+            );
             console.log(response)
     
             const json = await response.json()
@@ -24,8 +33,11 @@ const Home = () => {
                 })
             } 
         }
-        fetchPosts()
-    }, [dispatch])
+        if (user) {
+            fetchPosts()
+        }
+        
+    }, [dispatch, user])
     return ( 
         <div className="home">
             <a href="https://www.flaticon.com/free-icons/sports-and-competition" title="sports and competition icons">Sports and competition icons created by Freepik - Flaticon</a>
