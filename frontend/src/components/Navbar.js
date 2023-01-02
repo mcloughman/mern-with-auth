@@ -20,8 +20,7 @@ const Navbar = () => {
                     <Link to="/">
                         <h1>Two Minutes for Degeneration </h1>
                     </Link>
-                    <img src={logo} alt="hockey-sticks-money-bag" id="right-logo"/>
-                    <img src={nhlLogo} alt="nhl-logo"/>
+                    
                     {user && (
                         <div className="logout">
                         <span>{user.email}</span>
@@ -36,7 +35,8 @@ const Navbar = () => {
                         </div>
                     )}
                     
-                    
+                    <img src={logo} alt="hockey-sticks-money-bag" id="right-logo"/>
+                    <img src={nhlLogo} alt="nhl-logo"/>
                     
                 </header>
                 
