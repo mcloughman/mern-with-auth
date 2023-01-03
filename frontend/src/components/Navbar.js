@@ -17,21 +17,22 @@ const Navbar = () => {
                 <header className="nav">
                     <img src={nhlLogo} alt="nhl-logo"/>
                     <img src={logo} alt="hockey-sticks-money-bag" id="left-logo"/>
-                    <Link to="/">
-                        <h1>Two Minutes for Degeneration </h1>
-                    </Link>
-                    
                     {user && (
                         <div className="logout">
-                        <span>{user.email}</span>
+                        <span className="links">{user.email}</span>
                         {console.log(user.email)}
                         <button className="logout-btn" onClick={handleClick}>Logout</button>
                     </div>
                     )}
-                    {!user && (
-                        <div>
-                            <Link to="/login">Login</Link>
-                            <Link to="/signup">Signup</Link>
+                    <Link to="/">
+                        <h1>Two Minutes for Degenerating</h1>
+                    </Link>
+                    
+                    
+                    {user && (
+                        <div class="links">
+                            <Link to="/login"><span className="links">Login</span></Link>
+                            <Link to="/signup"><span className="links">Signup</span></Link>
                         </div>
                     )}
                     

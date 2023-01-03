@@ -3,9 +3,9 @@ const express = require("express");
 
 const Post = require("../models/postModel")
 const {createPost, getPosts, getPost, updatePost, deletePost} = require("../controllers/postController")
-const requireAuth = require("../middleware/requireAuth")
+const requireAuth = require("../middleware/requireAuth") // I'm only going to use middleware of selected POST routes
 const router = express.Router();
-router.use(requireAuth) // this will fire the middleware before the controller functions are called as we need authentication for all routes. If the user is authenticated, we now have req.user from the requireAuth middleware
+
 
 // GET all blogs
 router.get("/", getPosts)
@@ -13,10 +13,10 @@ router.get("/", getPosts)
 router.get("/:id", getPost)
 
 // POST a new blog
-router.post("/", createPost)
+router.post("/", requireAuth, createPost)
 // DELETE a blog
-router.delete("/:id", deletePost)
+router.delete("/:id", requireAuth, deletePost)
 // UPDATE a new blog
-router.patch("/:id", updatePost)
+router.patch("/:id", requireAuth, updatePost)
 
 module.exports = router;    

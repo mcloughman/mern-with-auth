@@ -15,9 +15,9 @@ const Home = () => {
             
             
             const response = await fetch("/api/posts", {
-                headers: {
-                   'Authorization': `Bearer ${user.token}`     
-                }
+                // headers: {
+                //    'Authorization': `Bearer ${user.token}`     
+                // }
                 
             }
             );
@@ -33,15 +33,15 @@ const Home = () => {
                 })
             } 
         }
-        if (user) {
+        // if (user) { don't need this protection. anybody can view posts
             fetchPosts()
-        }
+        // }
         
     }, [dispatch, user])
     return ( 
         <div className="home">
             <a href="https://www.flaticon.com/free-icons/sports-and-competition" title="sports and competition icons">Sports and competition icons created by Freepik - Flaticon</a>
-            <PostForm />
+            {user && <PostForm />}
             <div className="posts">
                 {posts && posts.map((post) => (
                     <PostDetails key={post._id} post={post}/>

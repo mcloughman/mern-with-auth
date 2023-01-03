@@ -44,6 +44,7 @@ const PostForm = () => {
          }
     }
     return ( 
+        
         <form className="create"  onSubmit={handleSubmit}>
             <h3>Add New Post</h3>
             <label htmlFor="">Title</label>

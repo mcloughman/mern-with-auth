@@ -3,8 +3,10 @@ const mongoose = require("mongoose")
 
 // get workouts
 const getPosts = async(req, res) => {
-        const user_id = req.user._id;
-        const posts = await Post.find({user_id}).sort({createdAt: -1})
+        // const user_id = req.user._id;
+        // const posts = await Post.find({user_id}).sort({createdAt: -1}) 
+        // All will be allowed to view posts
+        const posts = await Post.find({}).sort({createdAt: -1})
        
         res.status(200).json(posts)
     

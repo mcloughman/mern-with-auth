@@ -1,7 +1,10 @@
 import formatDistanceToNow from'date-fns/formatDistanceToNow'
+import DOMpurify from "dompurify"
 import trashIcon from "../images/trashcan.png"
 import { usePostsContext } from "../hooks/usePostsContext";
 import { useAuthContext } from '../hooks/useAuthContext';
+
+
 
 
 const PostDetails = ({post}) => {
@@ -10,6 +13,9 @@ const PostDetails = ({post}) => {
     
     const {dispatch} = usePostsContext()
     const {user} = useAuthContext()
+    const sanitizedBody = () => ({
+        __html: DOMpurify.sanitize(body)
+    })
 
     const handleClick = async(e) => {
         if (!user) {
@@ -32,9 +38,9 @@ const PostDetails = ({post}) => {
     }
     return ( 
         <div className="post-details">
-            <h3>{formatDistanceToNow(new Date(createdAt), {addSuffix: true})}</h3>
-            <h4>{title}<img src={trashIcon} alt="traschcan" className="trashcan" onClick={handleClick}/></h4>
-            <p><a href={`http://localhost:4000/api/posts/${_id}`}>{body.substring(0,4)}...</a></p>
+            <p>{formatDistanceToNow(new Date(createdAt), {addSuffix: true})}</p>
+            <h2>{title}{user && <img src={trashIcon} alt="traschcan" className="trashcan" onClick={handleClick}/>}</h2>
+            <div dangerouslySetInnerHTML={sanitizedBody()}/>
             
         </div>
      )
